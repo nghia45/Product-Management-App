@@ -64,19 +64,6 @@ export const getIncomeMonthly = async (req, res, next) => {
   }
 };
 
-// export const getTotalIncome = async (req, res, next) => {
-//   try {
-//     const incomeList = await getIncomeMonthly;
-//     let income = 0;
-//     incomeList.forEach((order) => {
-//       income += order.income;
-//     });
-//     res.status(200).json(incomeList);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// };
-
 export const getWarrantyMonthly = async (req, res, next) => {
   const date = new Date();
   const Monthly = new Date(date.setMonth(0));
@@ -101,20 +88,3 @@ export const getWarrantyMonthly = async (req, res, next) => {
   }
 };
 
-export const countUser = async (req, res, next) => {
-  try {
-    const count = await User.countDocuments({});
-    res.status(200).json(count);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const countOrder = async (req, res, next) => {
-  try {
-    const count = await Order.countDocuments({});
-    res.status(200).json(count);
-  } catch (err) {
-    next(err);
-  }
-};

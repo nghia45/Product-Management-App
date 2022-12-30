@@ -43,6 +43,7 @@ const New = ({ inputs, title }) => {
     }
   };
 
+  console.log(info);
   return (
     <div className="new">
       <Sidebar />
@@ -89,6 +90,7 @@ const New = ({ inputs, title }) => {
                 </div>
               ))}
               <div className="formInput">
+                <label>Loại</label>
                 <select id="type" onChange={handleChange}>
                   <option defaultValue={"null"}></option>
                   <option value={"Xe 3 bánh"}>Xe 3 bánh</option>

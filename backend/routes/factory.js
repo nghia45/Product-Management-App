@@ -10,9 +10,9 @@ import {addProToStock,
 
 const router = express.Router();
 
-router.patch("/addProToStock/:facid/:proid", addProToStock);
+router.post("/addtostorage/:facid/:proid", addProToStock);
 
-router.patch("/exportToStore/:facid/:storeid/:proid", exportToStore);
+router.post("/exportToStore/:facid/:storeid/:proid", exportToStore);
 
 router.get("/findFactoryProduct/:id/:proid", getProduct);
 

@@ -17,14 +17,13 @@
           font-size: 20px;
         }
   
-        .return-product-form {
+        .add-guarantee-form {
           display: flex;
           flex-direction: row;
-          margin-left: 5%;
           margin-top: 5%;
           gap: 5rem;
   
-          .formInput-return {
+          .formInput {
             label {
               display: flex;
               align-items: center;
@@ -36,14 +35,14 @@
             }
   
             select {
-              width: 20rem;
+              width: 200px;
               padding: 19px;
               border: none;
               border-bottom: 1px solid gray;
             }
   
             input {
-              width: 300px;
+              width: 200px;
               padding: 5px;
               border: none;
               border-bottom: 1px solid gray;

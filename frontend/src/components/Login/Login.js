@@ -23,7 +23,7 @@ const LoginButton = styled(Button)(
         padding: "15px 40px",
         marginTop: "5px",
         marginBottom: "10px",
-        backgroundColor: "#6e52ee",
+        backgroundColor: "#CB83CB",
         color: "#fff",
         fontSize: "14px",
         marginLeft: "auto",
@@ -33,7 +33,6 @@ const LoginButton = styled(Button)(
         transition: "all .3s ease",
         outline: "0",
         "&:hover": {
-            color: "#6e52ee",
             transform: "translateY(-3px)",
             boxShadow: "0 2px 6px -1px rgba($primary, .65)",
             "&:active": { transform: "scale(.99)" }
@@ -61,7 +60,7 @@ const Login = () => {
         try {
           const res = await axios.post("/auth/login", credentials);
           dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-          navigate("/addproduct")
+          navigate("/bigcorp")
         } catch (err) {
           dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
         }
@@ -83,7 +82,7 @@ const Login = () => {
                         <input placeholder="Mật khẩu" type="password" name="password" id="password" autocomplete="off" onChange={handleChange} />
                         <label for="password">Mật khẩu:</label>
                     </div>
-                    {error && <span className="undefined-message">{error.message}</span>}
+                    {error && <span className="error-message">{error.message}</span>}
                     <LoginButton disabled={loading} onClick={handleClick}>Đăng nhập</LoginButton>
                     <FormGroup>
                         <FormControlLabel control={<Checkbox defaultChecked color="secondary" />} label="Ghi nhớ đăng nhập" />

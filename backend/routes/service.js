@@ -3,13 +3,25 @@ import { getSer,
          getSers,
          getWarranty,
          getWarrantys,
-         updateWarranty } from "../controllers/service.js";
+         updateWarranty,
+         deleteWarranty,
+         ReturnToFactory,
+         ReturnToStore,
+         getWarrantysInService } from "../controllers/service.js";
 
 const router = express.Router();
 
 router.get("/findWarranty/:id/:orderid", getWarranty);
 
-router.get("/allWarrantys/:id", getWarrantys);
+router.patch("/returntostore/:id/:orderId", ReturnToStore);
+
+router.patch("/returntofactory/:id", ReturnToFactory);
+
+router.get("/guaranteesinservice/:id", getWarrantysInService);
+
+router.get("/guarantees/:id", getWarrantys);
+
+router.delete("/guarantees/:id", deleteWarranty);
 
 router.get("/findService/:id", getSer);
 

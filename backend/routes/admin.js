@@ -6,17 +6,10 @@ import {
   getPros,
   updatePro,
 } from "../controllers/product.js";
-import {
-  getUsers,
-  deleteUser,
-  getIncomeMonthly,
-  countUser,
-  countOrder,
-  //getTotalIncome,
-} from "../controllers/user.js";
+import { getUsers,
+         deleteUser} from "../controllers/user.js"
 import Product from "../models/Product.js";
-import { verifyAdmin } from "../utils/verifyToken.js";
-import { getOrders, getAllOrders } from "../controllers/store.js";
+import {verifyAdmin, verifyFactory} from "../utils/verifyToken.js"
 const router = express.Router();
 
 //CREATE
@@ -31,13 +24,9 @@ router.delete("/users/:id", deleteUser);
 
 router.get("/findProduct/:id", getPro);
 //GET ALL
-router.get("/products", getPros);
+router.get("/products",verifyFactory, getPros);
 router.get("/users", getUsers);
-router.get("/product", getAllOrders);
 
-//COUNT
-router.get("/countUser", countUser);
-router.get("/countOrder", countOrder);
-router.get("/countIncome", getIncomeMonthly);
-//router.get("/countTotalIncome", getTotalIncome);
+
+
 export default router;

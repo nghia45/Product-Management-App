@@ -3,43 +3,47 @@ import "./AddConsignment.scss";
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContex";
+import useFetch from "../../hooks/useFetch";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 
 const New = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
+  const [idPro, setIdPro] = useState();
+  const [idSto, setIdSto] = useState();
   const [info, setInfo] = useState({});
-
+  const [res, setRes] = useState();
+  const { user } = useContext(AuthContext);
+  const { data, loading, error } = useFetch(`/factory/factoryproducts/${user._id}`);
+  const datasto = useFetch("/store/allStores").data;
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+  const handleChange1 = (e) => {
+    setIdPro(e.target.value);
+  };
+
+  const handleChange2 = (e) => {
+    setIdSto(e.target.value);
+  };
+
   const handleClick = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "upload");
     try {
-      const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/drx0qwczc/image/upload",
-        data
-      );
-
-      const { url } = uploadRes.data;
-
-      const newUser = {
+      const newReq = {
         ...info,
-        img: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      const resp = await axios.post(`/factory/exportToStore/${user._id}/${idSto}/${idPro}`, newReq);
+      setRes(resp);
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(info);
+  console.log(info, idSto, idPro);
   return (
     <div className="new">
       <Sidebar />
@@ -49,30 +53,40 @@ const New = ({ inputs, title }) => {
           <h1>{title}</h1>
           <form className="add-consignment-form">
             <div className="formInput">
-              <label>Dòng sản phẩm</label>
-              <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-              </select>
+            <label>Dòng sản phẩm</label>
+                            <select id="product" onChange={handleChange1}>
+                            <option defaultValue={"null"}></option>
+                                {loading
+                                    ? "loading"
+                                        : data &&
+                                           data.map((product) => (
+                                           <option key={product.productId._id} value={product.productId._id}>
+                                           {product.productId.productname}
+                                           </option>
+                                           ))}
+                             </select>
             </div>
             <div className="formInput">
               <label>Số lượng</label>
-              <input></input>
+              <input type="text" id="quantity" onChange={handleChange}/>
             </div>
             <div className="formInput">
-              <label>Chọn cửa hàng</label>
-              <select>
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-              </select>
+              <label>Đại lý phân phối</label>
+                            <select id="store" onChange={handleChange2}>
+                            <option defaultValue={"null"}></option>
+                                {loading
+                                    ? "loading"
+                                        : datasto &&
+                                           datasto.map((sto) => (
+                                           <option key={sto._id} value={sto._id}>
+                                           {sto.username}
+                                           </option>
+                                           ))}
+                             </select>
             </div>
           </form>
         </div>
-        <button className="export-button">Xuất</button>
+        <button className="export-button" onClick={handleClick}>Xuất</button>
       </div>
     </div>
   );

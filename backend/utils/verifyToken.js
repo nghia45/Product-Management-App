@@ -16,7 +16,7 @@ export const verifyToken = (req, res, next) => {
 
 export const verifyFactory = (req, res, next) => {
   verifyToken(req, res, next, () => {
-    if (req.user.id === req.params.id && req.user.isFactory) {
+    if (req.user.isFactory) {
       next();
     } else {
       return next(createError(403, "You are not authorized!"));
@@ -26,7 +26,7 @@ export const verifyFactory = (req, res, next) => {
 
 export const verifyStore = (req, res, next) => {
     verifyToken(req, res, next, () => {
-      if (req.user.id === req.params.id && req.user.isStore) {
+      if (req.user.isStore) {
         next();
       } else {
         return next(createError(403, "You are not authorized!"));
@@ -36,7 +36,7 @@ export const verifyStore = (req, res, next) => {
 
 export const verifyService = (req, res, next) => {
     verifyToken(req, res, next, () => {
-      if (req.user.id === req.params.id && req.user.isService) {
+      if (req.user.isService) {
         next();
       } else {
         return next(createError(403, "You are not authorized!"));
@@ -46,10 +46,11 @@ export const verifyService = (req, res, next) => {
 
 export const verifyAdmin = (req, res, next) => {
   verifyToken(req, res, next, () => {
-    if (req.user.id === req.params.id && req.user.isAdmin) {
+    if (req.user.isAdmin) {
       next();
     } else {
       return next(createError(403, "You are not authorized!"));
     }
   });
 };
+

@@ -10,11 +10,12 @@ import { sellProduct,
          getProducts,
          updateOrder,
          deleteOrder,
-         deletestoreproduct } from "../controllers/store.js";
+         deletestoreproduct,
+         getOrdersInstore } from "../controllers/store.js";
 const router = express.Router();
 
 
-router.patch("/sellProduct/:storeid/:proid", sellProduct);
+router.post("/sellProduct/:storeid/:proid", sellProduct);
 
 router.post("/moveBroProToSer/:orderid/:serviceid", moveBrokenProToService);
 
@@ -31,6 +32,8 @@ router.get("/allStores", getStores);
 router.get("/findStoreOrder/:orderid", getOrder);
 
 router.get("/orders/:id", getOrders);
+
+router.get("/ordersinstore/:id", getOrdersInstore);
 
 router.get("/updateOrder/:id", updateOrder);
 
