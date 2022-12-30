@@ -1,0 +1,64 @@
+.new {
+  width: 100%;
+  display: flex;
+
+  .newContainer {
+    flex: 6;
+    .consignment-top,
+    .bottom {
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+
+      h1 {
+        color: lightgray;
+        font-size: 20px;
+      }
+
+      .add-consignment-form {
+        display: flex;
+        flex-direction: row;
+        margin-top: 5%;
+        gap: 5rem;
+
+        .formInput {
+          label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .icon {
+              cursor: pointer;
+            }
+          }
+
+          select {
+            width: 200px;
+            padding: 19px;
+            border: none;
+            border-bottom: 1px solid gray;
+          }
+
+          input {
+            width: 200px;
+            padding: 5px;
+            border: none;
+            border-bottom: 1px solid gray;
+          }
+        }
+      }
+    }
+    .export-button {
+      width: 200px;
+      margin-left: 40%;
+      border-radius: 0;
+      background-color: teal;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  }
+}
