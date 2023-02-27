@@ -6,38 +6,36 @@ import {
   getPros,
   updatePro,
 } from "../controllers/product.js";
-import {
-  getUsers,
-  deleteUser,
-  getIncomeMonthly,
-  countUser,
-  countOrder,
-  //getTotalIncome,
-} from "../controllers/user.js";
+import { getUsers,
+         deleteUser, 
+         countOrder,
+          countUser,
+          getIncomeMonthly} from "../controllers/user.js"
+import {getAllOrders} from "../controllers/store.js"
 import Product from "../models/Product.js";
-import { verifyAdmin } from "../utils/verifyToken.js";
-import { getOrders, getAllOrders } from "../controllers/store.js";
+import {verifyAdmin} from "../utils/verifyToken.js"
 const router = express.Router();
 
 //CREATE
-router.post("/createProduct", createProduct);
+router.post("/createProduct", verifyAdmin, createProduct);
 
 //UPDATE
-router.put("/updateProduct/:id", updatePro);
+router.put("/updateProduct/:id", verifyAdmin,  updatePro);
 //DELETE
-router.delete("/products/:id", deletePro);
-router.delete("/users/:id", deleteUser);
+router.delete("/products/:id", verifyAdmin, deletePro);
+router.delete("/users/:id", verifyAdmin, deleteUser);
 //GET
 
-router.get("/findProduct/:id", getPro);
+router.get("/findProduct/:id", verifyAdmin, getPro);
 //GET ALL
-router.get("/products", getPros);
-router.get("/users", getUsers);
-router.get("/product", getAllOrders);
+router.get("/products", verifyAdmin, getPros);
+router.get("/users", verifyAdmin, getUsers);
+router.get("/product", verifyAdmin, getAllOrders);
 
 //COUNT
-router.get("/countUser", countUser);
-router.get("/countOrder", countOrder);
-router.get("/countIncome", getIncomeMonthly);
-//router.get("/countTotalIncome", getTotalIncome);
+router.get("/countUser", verifyAdmin, countUser);
+router.get("/countOrder", verifyAdmin, countOrder);
+router.get("/countIncome", verifyAdmin, getIncomeMonthly);
+
+
 export default router;

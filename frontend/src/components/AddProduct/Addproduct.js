@@ -11,10 +11,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ClearIcon from '@mui/icons-material/Clear';
+
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
-
+  const [res, setRes] = useState();
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -37,12 +40,28 @@ const New = ({ inputs, title }) => {
         image: url,
       };
 
-      await axios.post("/admin/createProduct", newProd);
+      const resp = await axios.post("/admin/createProduct", newProd);
+      setRes(resp);
     } catch (err) {
       console.log(err);
     }
   };
 
+  console.log(info);
+  const renderMessage = () => {
+    if (res.status == 200) {
+        return <div className="success-message">
+            <CheckCircleOutlineIcon className="success-icon" />
+            <span className="message">{res.data}</span>
+        </div>
+    }
+    if (res.status == 500) {
+        return <div className="error-message">
+            <ClearIcon className="error-icon" />
+            <span className="message">{res.data}</span>
+        </div>
+    }
+}
   return (
     <div className="new">
       <Sidebar />
@@ -89,6 +108,7 @@ const New = ({ inputs, title }) => {
                 </div>
               ))}
               <div className="formInput">
+                <label>Loại</label>
                 <select id="type" onChange={handleChange}>
                   <option defaultValue={"null"}></option>
                   <option value={"Xe 3 bánh"}>Xe 3 bánh</option>
@@ -105,6 +125,11 @@ const New = ({ inputs, title }) => {
           </div>
         </div>
       </div>
+      {res &&
+        <div>
+          {renderMessage()}
+        </div>
+      }
     </div>
   );
 };

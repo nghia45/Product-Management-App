@@ -10,30 +10,37 @@ import { sellProduct,
          getProducts,
          updateOrder,
          deleteOrder,
-         deletestoreproduct } from "../controllers/store.js";
+         deletestoreproduct,
+         getOrdersInstore } from "../controllers/store.js";
+
+import { verifyStore } from "../utils/verifyToken.js";
+
+
 const router = express.Router();
 
 
-router.patch("/sellProduct/:storeid/:proid", sellProduct);
+router.post("/sellProduct/:storeid/:proid", verifyStore, sellProduct);
 
-router.post("/moveBroProToSer/:orderid/:serviceid", moveBrokenProToService);
+router.post("/moveBroProToSer/:orderid/:serviceid", verifyStore, moveBrokenProToService);
 
-router.delete("/orders/:id",deleteOrder);
+router.delete("/orders/:id", verifyStore,  deleteOrder);
 
-router.get("/findStoreProduct/:id/:proid", getProduct);
+router.get("/findStoreProduct/:id/:proid", verifyStore, getProduct);
 
-router.get("/storeproducts/:id", getProducts);
+router.get("/storeproducts/:id", verifyStore, getProducts);
 
-router.get("/findStore/:id", getStore);
+router.get("/findStore/:id", verifyStore, getStore);
 
-router.get("/allStores", getStores);
+router.get("/allStores", verifyStore, getStores);
 
-router.get("/findStoreOrder/:orderid", getOrder);
+router.get("/findStoreOrder/:orderid", verifyStore, getOrder);
 
-router.get("/orders/:id", getOrders);
+router.get("/orders/:id", verifyStore, getOrders);
 
-router.get("/updateOrder/:id", updateOrder);
+router.get("/ordersinstore/:id", verifyStore, getOrdersInstore);
 
-router.delete("/storeproducts/:id", deletestoreproduct);
+router.get("/updateOrder/:id", verifyStore, updateOrder);
+
+router.delete("/storeproducts/:id", verifyStore, deletestoreproduct);
 
 export default router

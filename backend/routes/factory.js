@@ -8,25 +8,27 @@ import {addProToStock,
         deleteFactoryproduct,
         getExports, } from "../controllers/factory.js";
 
+import { verifyFactory } from "../utils/verifyToken.js";
+
 const router = express.Router();
 
-router.patch("/addProToStock/:facid/:proid", addProToStock);
+router.post("/addtostorage/:facid/:proid", verifyFactory, addProToStock);
 
-router.patch("/exportToStore/:facid/:storeid/:proid", exportToStore);
+router.post("/exportToStore/:facid/:storeid/:proid", verifyFactory, exportToStore);
 
-router.get("/findFactoryProduct/:id/:proid", getProduct);
+router.get("/findFactoryProduct/:id/:proid", verifyFactory, getProduct);
 
-router.get("/factoryproducts/:id", getProducts);
+router.get("/factoryproducts/:id", verifyFactory, getProducts);
 
-router.get("/exports/:id", getExports);
+router.get("/exports/:id", verifyFactory, getExports);
 
-router.delete("/exports/:id", getExports);
+router.delete("/exports/:id", verifyFactory, getExports);
 
-router.delete("/factoryproducts/:id", deleteFactoryproduct);
+router.delete("/factoryproducts/:id", verifyFactory, deleteFactoryproduct);
 
-router.get("/findFactory/:id", getFactory);
+router.get("/findFactory/:id", verifyFactory, getFactory);
 
-router.get("/allFactorys", getFactorys);
+router.get("/allFactorys", verifyFactory, getFactorys);
 
 
 

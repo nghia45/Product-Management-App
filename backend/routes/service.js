@@ -3,18 +3,32 @@ import { getSer,
          getSers,
          getWarranty,
          getWarrantys,
-         updateWarranty } from "../controllers/service.js";
+         updateWarranty,
+         deleteWarranty,
+         ReturnToFactory,
+         ReturnToStore,
+         getWarrantysInService } from "../controllers/service.js";
+
+import { verifyService } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-router.get("/findWarranty/:id/:orderid", getWarranty);
+router.get("/findWarranty/:id/:orderid", verifyService, getWarranty);
 
-router.get("/allWarrantys/:id", getWarrantys);
+router.patch("/returntostore/:id/:orderId", verifyService, ReturnToStore);
 
-router.get("/findService/:id", getSer);
+router.patch("/returntofactory/:id", verifyService, ReturnToFactory);
 
-router.get("/allServices", getSers);
+router.get("/guaranteesinservice/:id", verifyService, getWarrantysInService);
 
-router.put("/updateWarranty/:id", updateWarranty);
+router.get("/guarantees/:id", verifyService, getWarrantys);
+
+router.delete("/guarantees/:id", verifyService, deleteWarranty);
+
+router.get("/findService/:id", verifyService, getSer);
+
+router.get("/allServices", verifyService, getSers);
+
+router.put("/updateWarranty/:id", verifyService, updateWarranty);
 
 export default router

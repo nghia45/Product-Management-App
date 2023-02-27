@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 const warrantySchema = new mongoose.Schema(
     {
-    Staff: {type: String, required: true},
+    staff: {type: String, required: false},
     status: {type: String, required: true},
-    desc: {type:String, require: true},
+    desc: {type:String, require: false},
     orderId: {type: mongoose.Schema.Types.ObjectId, ref:'Order'},
     serviceId: {type: mongoose.Schema.Types.ObjectId, ref:'User'}
    },
@@ -12,4 +12,4 @@ const warrantySchema = new mongoose.Schema(
    }
 );
 
-export default mongoose.model("warranty", warrantySchema);
+export default mongoose.model("Warranty", warrantySchema);

@@ -46,7 +46,7 @@ export const productInputs = [
   {
     id: "priceEach",
     label: "Giá sản phẩm",
-    type: "text",
+    type: "number",
     placeholder: "1.000.000$",
   },
   {
@@ -57,80 +57,31 @@ export const productInputs = [
   },
 ];
 
-export const hotelInputs = [
+
+
+export const orderInputs = [
   {
-    id: "name",
-    label: "Name",
+    id: "customerName",
+    label: "Tên khách hàng",
     type: "text",
-    placeholder: "My Hotel",
+    placeholder: "Nguyễn Văn A",
   },
   {
-    id: "type",
-    label: "Type",
+    id: "phoneNumber",
+    label: "Số điện thoại",
     type: "text",
-    placeholder: "hotel",
-  },
-  {
-    id: "city",
-    label: "City",
-    type: "text",
-    placeholder: "New York",
+    placeholder: "+84 23456789",
   },
   {
     id: "address",
-    label: "Address",
+    label: "Địa chỉ",
     type: "text",
-    placeholder: "elton st, 216",
+    placeholder: "Cầu Giấy, Hà Nội",
   },
   {
-    id: "distance",
-    label: "Distance from City Center",
+    id: "email",
+    label: "Email",
     type: "text",
-    placeholder: "500",
-  },
-  {
-    id: "title",
-    label: "Title",
-    type: "text",
-    placeholder: "The best Hotel",
-  },
-  {
-    id: "desc",
-    label: "Description",
-    type: "text",
-    placeholder: "description",
-  },
-  {
-    id: "cheapestPrice",
-    label: "Price",
-    type: "text",
-    placeholder: "100",
-  },
-];
-
-export const roomInputs = [
-  {
-    id: "title",
-    label: "Title",
-    type: "text",
-    placeholder: "2 bed room",
-  },
-  {
-    id: "desc",
-    label: "Description",
-    type: "text",
-    placeholder: "King size bed, 1 bathroom",
-  },
-  {
-    id: "price",
-    label: "Price",
-    type: "number",
-    placeholder: "100",
-  },
-  {
-    id: "maxPeople",
-    label: "Max People",
-    type: "number",
-    placeholder: "2",
+    placeholder: "a@gmail.com",
   },
 ];

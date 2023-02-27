@@ -4,20 +4,10 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
-  const username = await User.findOne({ username: req.body.username });
-  if (username) {
-    res.status(500).send("Trung ten dang nhap");
-    return next(createError(500, "Trùng tên đăng nhập"))
-  } else {
-    const email = await User.findOne({ email: req.body.email });
-    if (email) {
-      res.status(500).send("Trung email");
-      return next(createError(500, "Trùng email!"))
-    };
-  }
   try {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
+   
     const newUser = new User({
       ...req.body,
       password: hash,
@@ -31,7 +21,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    if (!user) return next(createError(404, "Không tìm thầy tên đăng nhập!"));
+    if (!user) return next(createError(404, "Không tìm thấy tên đăng nhập!"));
 
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
@@ -51,7 +41,7 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ details: { ...otherDetails } });
+      .json({ details: { ...otherDetails }});
   } catch (err) {
     next(err);
   }
