@@ -1,6 +1,6 @@
 # Product-Management-App
 
-## How to run locally
+## How to run locally using vscode
 
 ### backend
 New terminal
