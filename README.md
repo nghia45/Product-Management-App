@@ -4,11 +4,18 @@
 
 ### backend
 New terminal
+<br>
 cd backend
+<br>
 npm install --legacy-peer-deps
+<br>
 npm run server
+<br>
 
 New terminal
+<br>
 cd frontend
+<br>
 npm install --legacy-peer-deps
+<br>
 npm run start
