@@ -12,6 +12,7 @@ npm install --legacy-peer-deps
 npm run server
 <br>
 
+### frontend
 New terminal
 <br>
 cd frontend
